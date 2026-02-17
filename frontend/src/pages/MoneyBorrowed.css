@@ -1,0 +1,104 @@
+.money-borrowed-container {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.money-borrowed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.money-borrowed-header .header-content h1 {
+  font-size: 24px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.money-borrowed-header .header-content p {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.money-borrowed-header .add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #e84393 0%, #a855f7 100%);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(232, 67, 147, 0.3);
+}
+
+.money-borrowed-header .add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232, 67, 147, 0.4);
+}
+
+/* Money Borrowed List */
+.money-borrowed-list {
+  display: grid;
+  gap: 16px;
+}
+
+.money-borrowed-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  border-left: 3px solid #e84393;
+}
+
+.money-borrowed-card.fully-paid {
+  border-left-color: #10b981;
+  opacity: 0.85;
+}
+
+.money-borrowed-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.money-borrowed-card .person-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #e84393 0%, #a855f7 100%);
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.money-borrowed-card .value.total {
+  color: #e84393;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .money-borrowed-container {
+    padding: 14px;
+  }
+
+  .money-borrowed-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .money-borrowed-header .header-content h1 {
+    font-size: 20px;
+  }
+
+  .money-borrowed-header .add-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

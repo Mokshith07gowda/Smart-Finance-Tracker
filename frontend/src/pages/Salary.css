@@ -1,0 +1,134 @@
+.salary-summary {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.summary-icon {
+  width: 56px;
+  height: 56px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.salary-summary h3 {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  opacity: 0.9;
+}
+
+.salary-summary .total-amount {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.salary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.salary-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  transition: all 0.3s ease;
+}
+
+.salary-item:hover {
+  transform: translateY(-2px);
+}
+
+.salary-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.salary-details {
+  flex: 1;
+}
+
+.salary-details h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.salary-details p {
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.salary-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.type-badge {
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+}
+
+.salary-amount {
+  text-align: right;
+}
+
+.salary-amount .amount {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.salary-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .salary-summary {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .salary-summary .total-amount {
+    font-size: 28px;
+  }
+
+  .salary-item {
+    flex-wrap: wrap;
+  }
+
+  .salary-amount {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .salary-amount .amount {
+    margin-bottom: 0;
+  }
+}

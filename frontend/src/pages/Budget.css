@@ -1,0 +1,140 @@
+.month-selector {
+  margin-bottom: 16px;
+}
+
+.budget-overview {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  margin-bottom: 20px;
+}
+
+.budget-overview h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.budget-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.budget-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.budget-stat .label {
+  font-size: 12px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.budget-stat .value {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.warning-message {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 10px;
+  background-color: rgba(239, 68, 68, 0.2);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.budgets-grid {
+  margin-top: 16px;
+}
+
+.budget-card {
+  padding: 16px;
+}
+
+.budget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.budget-header h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.budget-amounts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.budget-amounts > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.amount-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.amount-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.budget-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.budget-footer .percentage {
+  color: var(--text-secondary);
+}
+
+.budget-warning {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  padding: 6px 10px;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger-color);
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .budget-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .budget-stat .value {
+    font-size: 18px;
+  }
+
+  .budgets-grid {
+    grid-template-columns: 1fr;
+  }
+}
