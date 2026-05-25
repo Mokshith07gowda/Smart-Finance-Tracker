@@ -1,237 +1,236 @@
-# Smart Expense and Salary Manager
+# FinanceTracker — AI-Powered Personal Finance Platform
 
-A full-stack web application built with the MERN stack (MongoDB, Express.js, React, Node.js) to help users track expenses, manage salary/income, set budgets, and gain insights into their financial habits.
+A production-ready, full-stack MERN application with **12 integrated modules**, **15+ AI engines**, **128+ currencies**, **25 languages**, and **30+ themes**. Track expenses, manage salaries, plan budgets, set goals, split bills, and get AI-powered financial insights — all in one platform.
 
-## 🌟 Features
+## Features
 
-### User Authentication
-- ✅ Secure registration and login with JWT authentication
-- ✅ Protected routes and user sessions
-- ✅ Password hashing with bcrypt
+### 12 Core Modules
+- **Dashboard** — Real-time overview with charts, AI chat, health score, spending heatmap
+- **Salary & Income** — Track multiple income sources with type-based filtering
+- **Budget Planner** — Category-wise monthly budgets with progress bars and alerts
+- **Expense Tracker** — Add, edit, delete, categorize, filter, and search expenses
+- **Money Lent** — Track money you've lent to others with status tracking
+- **Money Borrowed** — Track money you've borrowed with repayment tracking
+- **Split Bills** — Split expenses among friends equally or by custom amounts
+- **Financial Goals** — Set savings targets with progress tracking and deadlines
+- **Recurring Expenses** — Auto-track subscriptions and recurring payments
+- **Analytics** — Deep visual analytics with charts and spending breakdowns
+- **Smart Rules** — Automated rules engine for expense categorization
+- **Smart Notifications** — Event-driven alerts for budget limits, anomalies, goals
 
-### Expense Tracking
-- ✅ Add, edit, and delete expenses
-- ✅ Categorize expenses (Food, Travel, Bills, Entertainment, Healthcare, Shopping, Education, Other)
-- ✅ Filter expenses by category
-- ✅ View detailed expense history with dates
-- ✅ Real-time expense calculations
+### AI-Powered Intelligence (15+ Engines)
+- Financial health scoring
+- Spending predictions and forecasting
+- Budget alerts and anomaly detection
+- Auto-categorization of expenses
+- AI finance chat assistant
+- Safe spending calculator
+- Spending velocity tracking
+- Habit scoring
+- Subscription intelligence
 
-### Salary Management
-- ✅ Track multiple income sources (Monthly Salary, Bonus, Freelance, Investment, Other Income)
-- ✅ Add, edit, and delete salary entries
-- ✅ View complete salary history
-- ✅ Filter by income type
+### Multi-Currency (128+)
+- Live exchange rates
+- Automatic currency conversion
+- Country-based currency selection
 
-### Budget Planning
-- ✅ Set monthly budgets (overall and category-wise)
-- ✅ Visual progress bars showing budget usage
-- ✅ Warnings when spending exceeds limits
-- ✅ Track budget across different months and years
+### Multi-Language (25)
+- English, Hindi, Kannada, Telugu, Tamil, Malayalam, Bengali, Marathi, Gujarati, Punjabi, Urdu, Spanish, French, German, Portuguese, Japanese, Korean, Chinese, Arabic, Russian, Italian, Dutch, Swedish, Thai, Vietnamese
 
-### Dashboard & Insights
-- ✅ Total balance and savings calculation
-- ✅ Savings rate percentage
-- ✅ Recent transactions overview
-- ✅ Interactive charts:
-  - Monthly spending trends (6-month view)
-  - Category-wise expense distribution (Doughnut chart)
-  - Income vs Expenses comparison (Line chart)
-- ✅ Budget progress tracking
-- ✅ Financial health summary cards
+### Themes (30+)
+- Light, Dark, and Custom themes
+- 30+ preset themes (Ocean Blue, Dracula, Nord, Catppuccin, Tokyo Night, etc.)
+- Full color customization with 7 color pickers
 
-## 🛠️ Technology Stack
+## Tech Stack
 
-### Backend
-- **Node.js** - Runtime environment
-- **Express.js** - Web application framework
-- **MongoDB** - NoSQL database
-- **Mongoose** - ODM for MongoDB
-- **JWT** - Authentication tokens
-- **bcryptjs** - Password hashing
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | React 18, Tailwind CSS, Chart.js, React Router, Axios, React Icons, React Toastify |
+| **Backend** | Node.js, Express.js, Mongoose, JWT, bcryptjs, Helmet, express-rate-limit |
+| **Database** | MongoDB |
+| **Auth** | JWT + bcrypt, protected routes, forgot password with OTP email |
 
-### Frontend
-- **React** - UI library
-- **React Router** - Navigation
-- **Chart.js & react-chartjs-2** - Data visualization
-- **Axios** - HTTP client
-- **React Icons** - Icon library
-- **React Toastify** - Notifications
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 salary/
 ├── backend/
-│   ├── models/          # Database schemas
-│   ├── routes/          # API routes
-│   ├── middleware/      # Auth middleware
-│   ├── .env            # Environment variables
-│   ├── server.js       # Server entry point
+│   ├── middleware/       # JWT auth middleware
+│   ├── models/           # 12 Mongoose schemas
+│   ├── routes/           # 14 API route files
+│   ├── utils/            # Notification engine, email service
+│   ├── uploads/          # User file uploads
+│   ├── server.js         # Express entry point
 │   └── package.json
 │
-└── frontend/
-    ├── public/
-    ├── src/
-    │   ├── components/  # Reusable components
-    │   ├── pages/       # Page components
-    │   ├── context/     # React context (Auth)
-    │   ├── App.js
-    │   └── index.js
-    └── package.json
+├── frontend/
+│   ├── public/           # HTML, favicon, redirects
+│   ├── src/
+│   │   ├── components/   # Navbar, MobileBottomNav, NotificationBell
+│   │   ├── context/      # Auth, Theme, Currency, Language contexts
+│   │   ├── pages/        # 17 page components
+│   │   ├── index.css     # Tailwind + custom theme CSS
+│   │   └── App.js        # Routes and providers
+│   ├── tailwind.config.js
+│   └── package.json
+│
+├── .gitignore
+└── README.md
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- Node.js (v14 or higher)
+- Node.js v16+
 - MongoDB (local or Atlas)
-- npm or yarn
+- npm
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   cd salary
-   ```
+```bash
+# Clone and enter project
+git clone <your-repo-url>
+cd salary
 
-2. **Setup Backend**
-   ```bash
-   cd backend
-   npm install
-   ```
+# Install backend
+cd backend
+npm install
 
-3. **Configure Environment Variables**
-   
-   Create a `.env` file in the backend directory:
-   ```env
-   PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/salary-expense-manager
-   JWT_SECRET=your_super_secret_jwt_key_change_this_in_production_2026
-   JWT_EXPIRE=7d
-   ```
+# Install frontend
+cd ../frontend
+npm install
+```
 
-4. **Setup Frontend**
-   ```bash
-   cd ../frontend
-   npm install
-   ```
+### Environment Variables
 
-### Running the Application
+Create `backend/.env` (see `backend/.env.example`):
 
-1. **Start MongoDB**
-   Make sure MongoDB is running on your system
+```env
+PORT=5000
+NODE_ENV=development
+MONGODB_URI=mongodb://localhost:27017/salary-expense-manager
+JWT_SECRET=your_strong_secret_key
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_app_password
+```
 
-2. **Start Backend Server**
-   ```bash
-   cd backend
-   npm run dev
-   ```
-   Server will run on `http://localhost:5000`
+### Run Development
 
-3. **Start Frontend Development Server**
-   ```bash
-   cd frontend
-   npm start
-   ```
-   Application will open on `http://localhost:3000`
+```bash
+# Terminal 1 — Backend
+cd backend
+npm run dev
 
-## 📊 API Endpoints
+# Terminal 2 — Frontend
+cd frontend
+npm start
+```
 
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `GET /api/auth/me` - Get current user
+- Backend: `http://localhost:5000`
+- Frontend: `http://localhost:3000`
 
-### Expenses
-- `GET /api/expenses` - Get all expenses
-- `POST /api/expenses` - Create expense
-- `PUT /api/expenses/:id` - Update expense
-- `DELETE /api/expenses/:id` - Delete expense
+## API Endpoints
 
-### Salary
-- `GET /api/salary` - Get all salary entries
-- `POST /api/salary` - Create salary entry
-- `PUT /api/salary/:id` - Update salary entry
-- `DELETE /api/salary/:id` - Delete salary entry
+### Auth
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register |
+| POST | `/api/auth/login` | Login |
+| GET | `/api/auth/me` | Current user |
+| POST | `/api/auth/forgot-password` | Send OTP |
+| POST | `/api/auth/reset-password` | Reset password |
 
-### Budget
-- `GET /api/budget` - Get budgets
-- `POST /api/budget` - Create/Update budget
-- `PUT /api/budget/:id` - Update budget
-- `DELETE /api/budget/:id` - Delete budget
+### Core CRUD (all protected)
+| Resource | GET | POST | PUT | DELETE |
+|----------|-----|------|-----|--------|
+| `/api/expenses` | List | Create | Update `:id` | Delete `:id` |
+| `/api/salary` | List | Create | Update `:id` | Delete `:id` |
+| `/api/budget` | List | Create | Update `:id` | Delete `:id` |
+| `/api/goals` | List | Create | Update `:id` | Delete `:id` |
+| `/api/money-lent` | List | Create | Update `:id` | Delete `:id` |
+| `/api/money-borrowed` | List | Create | Update `:id` | Delete `:id` |
+| `/api/split-bills` | List | Create | Update `:id` | Delete `:id` |
+| `/api/recurring-expenses` | List | Create | Update `:id` | Delete `:id` |
+| `/api/rules` | List | Create | Update `:id` | Delete `:id` |
+| `/api/notifications` | List | Generate | Mark read | Delete `:id` |
 
-### Dashboard
-- `GET /api/dashboard/summary` - Get dashboard summary
-- `GET /api/dashboard/monthly-trend` - Get 6-month trend data
-- `GET /api/dashboard/recent-transactions` - Get recent transactions
+### AI & Analytics
+| Endpoint | Description |
+|----------|-------------|
+| `/api/smart/financial-health` | Health score |
+| `/api/smart/predictions` | Spending predictions |
+| `/api/smart/insights` | Financial insights |
+| `/api/smart/budget-alerts` | Budget alerts |
+| `/api/smart/ai-chat` | AI chat assistant |
+| `/api/smart/safe-spending` | Safe spending limit |
+| `/api/smart/spending-heatmap` | Spending heatmap |
+| `/api/smart/deep-analytics` | Deep analytics |
+| `/api/smart/anomalies` | Anomaly detection |
+| `/api/smart/habit-score` | Habit scoring |
+| `/api/dashboard/summary` | Dashboard summary |
+| `/api/dashboard/monthly-trend` | Monthly trends |
 
-## 🎨 Features Showcase
+### Utility
+| Endpoint | Description |
+|----------|-------------|
+| `/api/exchange-rates/:base` | Live exchange rates |
+| `/api/health` | Server health check |
 
-### Dashboard
-- Real-time financial overview
-- Visual charts for better understanding
-- Quick access to recent transactions
-- Budget tracking with warnings
+## Responsive Design
 
-### Expense Management
-- Intuitive categorization
-- Easy filtering and search
-- Clean, modern UI
-- Quick edit and delete actions
+- **Desktop** — Full sidebar navigation + top navbar
+- **Tablet** — Sidebar + responsive grids
+- **Mobile** — Hamburger menu + fixed bottom navigation bar (Salary, Budget, Expenses, Goals)
 
-### Salary Tracking
-- Multiple income source support
-- Comprehensive history view
-- Type-based filtering
-- Clear income visualization
+## Security
 
-### Budget Planning
-- Category-wise budgets
-- Monthly budget tracking
-- Visual progress indicators
-- Over-budget warnings
+- JWT authentication with protected routes
+- Password hashing (bcrypt)
+- Helmet security headers
+- Rate limiting (auth: 20/15min, general: 300/15min)
+- CORS configuration (restricted in production)
+- Environment variable isolation
+- Graceful server shutdown
 
-## 🔒 Security Features
+## Deployment
 
-- JWT-based authentication
-- Password hashing with bcrypt
-- Protected API routes
-- Secure user sessions
-- Environment variable configuration
+### Production Build
 
-## 📱 Responsive Design
+```bash
+# Build frontend
+cd frontend
+npm run build
 
-The application is fully responsive and works seamlessly on:
-- Desktop computers
-- Tablets
-- Mobile devices
+# Start production server
+cd ../backend
+NODE_ENV=production npm start
+```
 
-## 🎯 Future Enhancements
+The backend serves the frontend build in production mode.
 
-- Export data to CSV/PDF
-- Recurring transactions
-- Multi-currency support
-- Email notifications
-- Advanced analytics and reports
-- Goal setting features
-- Bill reminders
+### Environment Variables (Production)
 
-## 🤝 Contributing
+```env
+NODE_ENV=production
+PORT=5000
+MONGODB_URI=<your-mongodb-atlas-uri>
+JWT_SECRET=<strong-random-secret>
+EMAIL_USER=<your-email>
+EMAIL_PASS=<app-password>
+CLIENT_URL=<your-domain>
+```
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+### Supported Platforms
+- **Render** — Set build command and env vars
+- **Railway** — Auto-detects Node.js
+- **Heroku** — Uses `heroku-postbuild` script
+- **Netlify** (frontend only) — `_redirects` file included
 
-## 📄 License
+## License
 
-This project is open source and available under the MIT License.
-
-## 👨‍💻 Author
-
-Built with ❤️ as a comprehensive financial management solution.
-
-## 📧 Support
-
-For support, please open an issue in the repository.
+MIT License. Open source and free to use.
 
 ---
 
-**Note:** Remember to change the JWT_SECRET in production and use a secure MongoDB connection string.
+Built with React, Node.js, MongoDB, Tailwind CSS, and Chart.js.

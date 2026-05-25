@@ -73,12 +73,31 @@ export const ThemeProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    const root = document.documentElement;
+    root.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
 
-    if (theme === 'custom') {
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else if (theme === 'custom') {
       applyCustomColors(customColors);
+      // Detect if custom bg is dark and add dark class accordingly
+      const { r, g, b } = (() => {
+        const hex = customColors.bgColor;
+        return { r: parseInt(hex.slice(1, 3), 16), g: parseInt(hex.slice(3, 5), 16), b: parseInt(hex.slice(5, 7), 16) };
+      })();
+      const isDarkBg = (r * 0.299 + g * 0.587 + b * 0.114) < 128;
+      if (isDarkBg) {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
     } else {
+      root.classList.remove('dark');
+      clearCustomStyles();
+    }
+
+    if (theme !== 'custom') {
       clearCustomStyles();
     }
   }, [theme, customColors, applyCustomColors, clearCustomStyles]);

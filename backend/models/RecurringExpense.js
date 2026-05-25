@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const expenseSchema = new mongoose.Schema({
+const recurringExpenseSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -18,30 +18,34 @@ const expenseSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    required: [true, 'Please provide a category'],
+    required: true,
     trim: true
   },
-  isRecurring: {
-    type: Boolean,
-    default: false
-  },
-  paymentMethod: {
+  frequency: {
     type: String,
-    enum: ['Cash', 'UPI', 'Credit Card', 'Debit Card', 'Net Banking', 'Wallet', 'Other'],
-    default: 'Cash'
+    enum: ['weekly', 'monthly', 'quarterly', 'yearly'],
+    default: 'monthly'
   },
-  tags: [{
-    type: String,
-    trim: true
-  }],
+  dayOfMonth: {
+    type: Number,
+    min: 1,
+    max: 31,
+    default: 1
+  },
   description: {
     type: String,
     trim: true
   },
-  date: {
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  nextDueDate: {
     type: Date,
-    required: true,
-    default: Date.now
+    required: true
+  },
+  lastProcessedDate: {
+    type: Date
   },
   createdAt: {
     type: Date,
@@ -49,7 +53,6 @@ const expenseSchema = new mongoose.Schema({
   }
 });
 
-// Index for faster queries
-expenseSchema.index({ user: 1, date: -1 });
+recurringExpenseSchema.index({ user: 1, isActive: 1 });
 
-module.exports = mongoose.model('Expense', expenseSchema);
+module.exports = mongoose.model('RecurringExpense', recurringExpenseSchema);

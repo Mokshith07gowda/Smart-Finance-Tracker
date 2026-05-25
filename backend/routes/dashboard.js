@@ -73,24 +73,22 @@ router.get('/summary', async (req, res) => {
 
     // Calculate overall balance (all-time)
     const allSalaries = await Salary.find({ user: req.user._id });
-    const allTimeSalary = allSalaries.reduce((sum, s) => sum + s.amount, 0);
+    const allTimeSalary = allSalaries.reduce((sum, s) => sum + (Number(s.amount) || 0), 0);
 
     const allExpenses = await Expense.find({ user: req.user._id });
-    const allTimeExpenses = allExpenses.reduce((sum, e) => sum + e.amount, 0);
+    const allTimeExpenses = allExpenses.reduce((sum, e) => sum + (Number(e.amount) || 0), 0);
 
     const allMoneyLent = await MoneyLent.find({ user: req.user._id });
     const totalLentOutstanding = allMoneyLent.reduce((sum, l) => {
-      const paid = (l.payments || []).reduce((s, p) => s + p.amount, 0);
-      return sum + (l.amount - paid);
+      return sum + (Number(l.amountRemaining) || 0);
     }, 0);
 
     const allMoneyBorrowed = await MoneyBorrowed.find({ user: req.user._id });
     const totalBorrowedOutstanding = allMoneyBorrowed.reduce((sum, b) => {
-      const paid = (b.payments || []).reduce((s, p) => s + p.amount, 0);
-      return sum + (b.amount - paid);
+      return sum + (Number(b.amountRemaining) || 0);
     }, 0);
 
-    const balance = allTimeSalary - allTimeExpenses - totalLentOutstanding + totalBorrowedOutstanding;
+    const balance = Number(allTimeSalary) - Number(allTimeExpenses) - Number(totalLentOutstanding) + Number(totalBorrowedOutstanding);
 
     res.json({
       balance,

@@ -72,6 +72,7 @@ router.post('/register', async (req, res) => {
         name: user.name,
         email: user.email,
         profilePicture: user.profilePicture,
+        preferredCurrency: user.preferredCurrency,
         token: generateToken(user._id)
       });
     }
@@ -102,6 +103,7 @@ router.post('/login', async (req, res) => {
         name: user.name,
         email: user.email,
         profilePicture: user.profilePicture,
+        preferredCurrency: user.preferredCurrency,
         token: generateToken(user._id)
       });
     } else {
@@ -498,13 +500,15 @@ router.post('/reset-account', protect, async (req, res) => {
     const Budget = require('../models/Budget');
     const MoneyLent = require('../models/MoneyLent');
     const MoneyBorrowed = require('../models/MoneyBorrowed');
+    const SplitBill = require('../models/SplitBill');
 
     await Promise.all([
       Expense.deleteMany({ user: user._id }),
       Salary.deleteMany({ user: user._id }),
       Budget.deleteMany({ user: user._id }),
       MoneyLent.deleteMany({ user: user._id }),
-      MoneyBorrowed.deleteMany({ user: user._id })
+      MoneyBorrowed.deleteMany({ user: user._id }),
+      SplitBill.deleteMany({ user: user._id })
     ]);
 
     // Delete the OTP
@@ -534,6 +538,7 @@ router.post('/send-delete-account-otp', protect, async (req, res) => {
     // Create new OTP
     const otpDoc = new OTP({
       user: user._id,
+      email: user.email,
       otp: otp,
       purpose: 'delete-account',
       expiresAt: new Date(Date.now() + 10 * 60 * 1000) // 10 minutes
@@ -582,13 +587,15 @@ router.post('/delete-account', protect, async (req, res) => {
     const Budget = require('../models/Budget');
     const MoneyLent = require('../models/MoneyLent');
     const MoneyBorrowed = require('../models/MoneyBorrowed');
+    const SplitBill = require('../models/SplitBill');
 
     await Promise.all([
       Expense.deleteMany({ user: user._id }),
       Salary.deleteMany({ user: user._id }),
       Budget.deleteMany({ user: user._id }),
       MoneyLent.deleteMany({ user: user._id }),
-      MoneyBorrowed.deleteMany({ user: user._id })
+      MoneyBorrowed.deleteMany({ user: user._id }),
+      SplitBill.deleteMany({ user: user._id })
     ]);
 
     // Delete all OTPs for this user
@@ -601,6 +608,35 @@ router.post('/delete-account', protect, async (req, res) => {
   } catch (error) {
     console.error('Delete account error:', error);
     res.status(500).json({ message: 'Failed to delete account. Please try again.' });
+  }
+});
+
+// @route   PUT /api/auth/update-currency
+// @desc    Update user's preferred currency
+// @access  Private
+router.put('/update-currency', protect, async (req, res) => {
+  try {
+    const { countryCode } = req.body;
+
+    // Validation
+    if (!countryCode) {
+      return res.status(400).json({ message: 'Please provide a country code' });
+    }
+
+    // Update user's preferred currency
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      { preferredCurrency: countryCode },
+      { new: true, runValidators: true }
+    );
+
+    res.json({
+      message: 'Currency preference updated successfully',
+      preferredCurrency: user.preferredCurrency
+    });
+  } catch (error) {
+    console.error('Update currency error:', error);
+    res.status(500).json({ message: 'Failed to update currency preference' });
   }
 });
 

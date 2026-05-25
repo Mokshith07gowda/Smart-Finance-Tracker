@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Budget = require('../models/Budget');
 const { protect } = require('../middleware/auth');
+const generateNotifications = require('../utils/generateNotifications');
 
 // All routes are protected
 router.use(protect);
@@ -49,6 +50,7 @@ router.post('/', async (req, res) => {
       // Update existing budget
       existingBudget.amount = amount;
       await existingBudget.save();
+      generateNotifications(req.user._id).catch(() => {});
       return res.json(existingBudget);
     }
 
@@ -62,6 +64,7 @@ router.post('/', async (req, res) => {
     });
 
     res.status(201).json(budget);
+    generateNotifications(req.user._id).catch(() => {});
   } catch (error) {
     console.error('Create budget error:', error);
     res.status(500).json({ message: 'Server error' });
@@ -88,6 +91,7 @@ router.put('/:id', async (req, res) => {
     );
 
     res.json(budget);
+    generateNotifications(req.user._id).catch(() => {});
   } catch (error) {
     console.error('Update budget error:', error);
     res.status(500).json({ message: 'Server error' });
@@ -107,6 +111,7 @@ router.delete('/:id', async (req, res) => {
 
     await Budget.findByIdAndDelete(req.params.id);
     res.json({ message: 'Budget deleted successfully' });
+    generateNotifications(req.user._id).catch(() => {});
   } catch (error) {
     console.error('Delete budget error:', error);
     res.status(500).json({ message: 'Server error' });

@@ -1,5 +1,6 @@
-import React, { createContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useState, useEffect, useCallback, useContext } from 'react';
 import axios from 'axios';
+import { AuthContext } from './AuthContext';
 
 export const CurrencyContext = createContext();
 
@@ -153,26 +154,43 @@ const COUNTRIES = [
 ];
 
 export const CurrencyProvider = ({ children }) => {
+  const { user } = useContext(AuthContext);
+  
   const [countryCode, setCountryCode] = useState(() => {
+    // Use localStorage as temporary fallback until user data loads
     return localStorage.getItem('countryCode') || 'IN';
   });
 
   const [exchangeRates, setExchangeRates] = useState({ INR: 1 });
   const [ratesLoaded, setRatesLoaded] = useState(false);
+  const [ratesError, setRatesError] = useState(false);
 
   const country = COUNTRIES.find(c => c.code === countryCode) || COUNTRIES[0];
+
+  // Load user's preferred currency when user data is available
+  useEffect(() => {
+    if (user && user.preferredCurrency) {
+      setCountryCode(user.preferredCurrency);
+      localStorage.setItem('countryCode', user.preferredCurrency);
+    }
+  }, [user]);
 
   // Fetch live exchange rates from our backend
   useEffect(() => {
     const fetchRates = async () => {
       try {
         const response = await axios.get('/api/exchange-rates');
+        
         if (response.data.success && response.data.rates) {
           setExchangeRates(response.data.rates);
           setRatesLoaded(true);
+          setRatesError(false);
+        } else {
+          setRatesError(true);
         }
       } catch (error) {
-        console.warn('Failed to fetch exchange rates from server');
+        console.error('Failed to fetch exchange rates:', error);
+        setRatesError(true);
       }
     };
 
@@ -183,15 +201,13 @@ export const CurrencyProvider = ({ children }) => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('countryCode', countryCode);
-  }, [countryCode]);
-
   // Convert from INR (base) to selected currency
   const convertFromBase = useCallback((amountInINR) => {
     if (!amountInINR || isNaN(amountInINR)) return 0;
+    
     const rate = exchangeRates[country.currency] || 1;
-    return Number(amountInINR) * rate;
+    const converted = Number(amountInINR) * rate;
+    return converted;
   }, [country.currency, exchangeRates]);
 
   // Convert from selected currency to INR (base) for storage
@@ -210,10 +226,20 @@ export const CurrencyProvider = ({ children }) => {
       minimumFractionDigits: 0,
       maximumFractionDigits: 2
     })}`;
-  }, [country, convertFromBase]);
+  }, [country.symbol, convertFromBase]);
 
-  const changeCountry = (code) => {
+  const changeCountry = async (code) => {
     setCountryCode(code);
+    localStorage.setItem('countryCode', code);
+    
+    // Save to backend if user is logged in
+    if (user) {
+      try {
+        await axios.put('/api/auth/update-currency', { countryCode: code });
+      } catch (error) {
+        console.error('Failed to update currency preference:', error);
+      }
+    }
   };
 
   return (
@@ -226,7 +252,9 @@ export const CurrencyProvider = ({ children }) => {
       convertFromBase,
       convertToBase,
       ratesLoaded,
-      currencySymbol: country.symbol
+      ratesError,
+      currencySymbol: country.symbol,
+      exchangeRates
     }}>
       {children}
     </CurrencyContext.Provider>

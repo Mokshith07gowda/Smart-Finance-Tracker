@@ -138,8 +138,9 @@ router.post('/', protect, async (req, res) => {
       if (yourParticipant) {
         const expense = new Expense({
           user: req.user.id,
+          title: description || 'Split Bill - My Share',
           amount: yourParticipant.amount,
-          category: 'Others',
+          category: 'Other',
           description: description || 'Split Bill - My Share',
           date: date || Date.now()
         });
@@ -165,7 +166,6 @@ router.post('/', protect, async (req, res) => {
       }
     } else {
       // SOMEONE ELSE PAID - Add your share to money borrowed
-      
       if (yourParticipant && yourParticipant.amount > 0) {
         const moneyBorrowed = new MoneyBorrowed({
           user: req.user.id,
@@ -180,7 +180,7 @@ router.post('/', protect, async (req, res) => {
     res.status(201).json(splitBill);
   } catch (error) {
     console.error('Create split bill error:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: error.message || 'Server error' });
   }
 });
 

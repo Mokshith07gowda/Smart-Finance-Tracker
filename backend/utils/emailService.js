@@ -20,29 +20,23 @@ const createTransporter = () => {
 };
 
 // Send OTP email
-const sendOTPEmail = async (email, otp) => {
+const sendOTPEmail = async (email, otp, purpose = 'Password Reset') => {
   try {
-    console.log('Email config:', {
-      host: process.env.EMAIL_HOST,
-      port: process.env.EMAIL_PORT,
-      user: process.env.EMAIL_USER,
-      passLength: process.env.EMAIL_PASS ? process.env.EMAIL_PASS.length : 0
-    });
     const transporter = createTransporter();
     
     const mailOptions = {
       from: process.env.EMAIL_FROM || 'Salary Expense Manager <noreply@salarymanager.com>',
       to: email,
-      subject: 'Password Reset OTP - Salary & Expense Manager',
+      subject: `${purpose} OTP - Salary & Expense Manager`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center;">
             <h1 style="color: white; margin: 0;">Salary & Expense Manager</h1>
           </div>
           <div style="padding: 30px; background-color: #f9fafb;">
-            <h2 style="color: #1f2937;">Password Reset Request</h2>
+            <h2 style="color: #1f2937;">${purpose} Request</h2>
             <p style="color: #6b7280; font-size: 16px;">
-              You have requested to reset your password. Please use the following OTP to proceed:
+              You have requested: <strong>${purpose}</strong>. Please use the following OTP to proceed:
             </p>
             <div style="background-color: white; padding: 20px; text-align: center; border-radius: 8px; margin: 20px 0;">
               <h1 style="color: #4f46e5; font-size: 36px; letter-spacing: 8px; margin: 0;">

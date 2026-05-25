@@ -24,6 +24,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
+  preferredCurrency: {
+    type: String,
+    default: 'IN', // Default to India (INR)
+    trim: true
+  },
   createdAt: {
     type: Date,
     default: Date.now

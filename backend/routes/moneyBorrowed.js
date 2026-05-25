@@ -3,6 +3,30 @@ const router = express.Router();
 const MoneyBorrowed = require('../models/MoneyBorrowed');
 const { protect } = require('../middleware/auth');
 
+// @route   GET /api/money-borrowed/stats
+// @desc    Get money borrowed statistics
+// @access  Private
+router.get('/stats', protect, async (req, res) => {
+  try {
+    const records = await MoneyBorrowed.find({ user: req.user._id });
+    
+    const totalBorrowed = records.reduce((sum, record) => sum + record.totalAmount, 0);
+    const totalPaidBack = records.reduce((sum, record) => sum + record.amountPaid, 0);
+    const totalPending = records.reduce((sum, record) => sum + record.amountRemaining, 0);
+    const activeDebts = records.filter(record => !record.isFullyPaid).length;
+
+    res.json({
+      totalBorrowed,
+      totalPaidBack,
+      totalPending,
+      activeDebts
+    });
+  } catch (error) {
+    console.error('Get stats error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // @route   GET /api/money-borrowed
 // @desc    Get all money borrowed records
 // @access  Private
@@ -126,30 +150,6 @@ router.delete('/:id', protect, async (req, res) => {
     res.json({ message: 'Money borrowed record deleted' });
   } catch (error) {
     console.error('Delete money borrowed error:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-// @route   GET /api/money-borrowed/stats
-// @desc    Get money borrowed statistics
-// @access  Private
-router.get('/stats', protect, async (req, res) => {
-  try {
-    const records = await MoneyBorrowed.find({ user: req.user._id });
-    
-    const totalBorrowed = records.reduce((sum, record) => sum + record.totalAmount, 0);
-    const totalPaidBack = records.reduce((sum, record) => sum + record.amountPaid, 0);
-    const totalPending = records.reduce((sum, record) => sum + record.amountRemaining, 0);
-    const activeDebts = records.filter(record => !record.isFullyPaid).length;
-
-    res.json({
-      totalBorrowed,
-      totalPaidBack,
-      totalPending,
-      activeDebts
-    });
-  } catch (error) {
-    console.error('Get stats error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });

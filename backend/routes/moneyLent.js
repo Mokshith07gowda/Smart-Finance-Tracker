@@ -3,6 +3,30 @@ const router = express.Router();
 const MoneyLent = require('../models/MoneyLent');
 const { protect } = require('../middleware/auth');
 
+// @route   GET /api/money-lent/stats
+// @desc    Get money lent statistics
+// @access  Private
+router.get('/stats', protect, async (req, res) => {
+  try {
+    const records = await MoneyLent.find({ user: req.user._id });
+    
+    const totalLent = records.reduce((sum, record) => sum + record.totalAmount, 0);
+    const totalReceived = records.reduce((sum, record) => sum + record.amountPaid, 0);
+    const totalPending = records.reduce((sum, record) => sum + record.amountRemaining, 0);
+    const activeLoans = records.filter(record => !record.isFullyPaid).length;
+
+    res.json({
+      totalLent,
+      totalReceived,
+      totalPending,
+      activeLoans
+    });
+  } catch (error) {
+    console.error('Get stats error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // @route   GET /api/money-lent
 // @desc    Get all money lent records
 // @access  Private
@@ -126,30 +150,6 @@ router.delete('/:id', protect, async (req, res) => {
     res.json({ message: 'Money lent record deleted' });
   } catch (error) {
     console.error('Delete money lent error:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-// @route   GET /api/money-lent/stats
-// @desc    Get money lent statistics
-// @access  Private
-router.get('/stats', protect, async (req, res) => {
-  try {
-    const records = await MoneyLent.find({ user: req.user._id });
-    
-    const totalLent = records.reduce((sum, record) => sum + record.totalAmount, 0);
-    const totalReceived = records.reduce((sum, record) => sum + record.amountPaid, 0);
-    const totalPending = records.reduce((sum, record) => sum + record.amountRemaining, 0);
-    const activeLoans = records.filter(record => !record.isFullyPaid).length;
-
-    res.json({
-      totalLent,
-      totalReceived,
-      totalPending,
-      activeLoans
-    });
-  } catch (error) {
-    console.error('Get stats error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });

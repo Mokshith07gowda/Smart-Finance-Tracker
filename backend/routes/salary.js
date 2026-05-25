@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Salary = require('../models/Salary');
 const { protect } = require('../middleware/auth');
+const generateNotifications = require('../utils/generateNotifications');
 
 // All routes are protected
 router.use(protect);
@@ -60,8 +61,12 @@ router.post('/', async (req, res) => {
   try {
     const { title, amount, type, description, date } = req.body;
 
-    if (!title || !amount || !type) {
+    if (!title || amount === undefined || amount === null || !type) {
       return res.status(400).json({ message: 'Please provide title, amount, and type' });
+    }
+
+    if (isNaN(amount) || Number(amount) <= 0) {
+      return res.status(400).json({ message: 'Amount must be a positive number' });
     }
 
     const salary = await Salary.create({
@@ -74,6 +79,7 @@ router.post('/', async (req, res) => {
     });
 
     res.status(201).json(salary);
+    generateNotifications(req.user._id).catch(() => {});
   } catch (error) {
     console.error('Create salary error:', error);
     res.status(500).json({ message: 'Server error' });
@@ -100,6 +106,7 @@ router.put('/:id', async (req, res) => {
     );
 
     res.json(salary);
+    generateNotifications(req.user._id).catch(() => {});
   } catch (error) {
     console.error('Update salary error:', error);
     res.status(500).json({ message: 'Server error' });
@@ -119,6 +126,7 @@ router.delete('/:id', async (req, res) => {
 
     await Salary.findByIdAndDelete(req.params.id);
     res.json({ message: 'Salary entry deleted successfully' });
+    generateNotifications(req.user._id).catch(() => {});
   } catch (error) {
     console.error('Delete salary error:', error);
     res.status(500).json({ message: 'Server error' });

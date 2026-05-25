@@ -23,8 +23,8 @@ const budgetSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['Overall', 'Food', 'Travel', 'Bills', 'Entertainment', 'Healthcare', 'Shopping', 'Education', 'Other'],
-    default: 'Overall'
+    default: 'Overall',
+    trim: true
   },
   createdAt: {
     type: Date,
