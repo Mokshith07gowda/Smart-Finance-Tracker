@@ -87,8 +87,8 @@ const Login = () => {
                 <FiDollarSign size={22} className="text-white" />
               </div>
               <div>
-                <span className="text-white text-base font-bold tracking-tight block leading-tight">Smart Finance</span>
-                <span className="text-indigo-300/50 text-[10px] font-medium tracking-[0.15em] uppercase">Tracker Pro</span>
+                <span className="text-white text-base font-bold tracking-tight block leading-tight">FinanceTracker</span>
+                <span className="text-indigo-300/50 text-[10px] font-medium tracking-[0.15em] uppercase">AI-Powered Finance</span>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -257,10 +257,10 @@ const Login = () => {
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 py-14">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { value: '128+', label: 'World Currencies', desc: 'Real-time exchange rates', icon: <FiGlobe size={22} />, color: 'text-indigo-400' },
-              { value: '7', label: 'Smart Modules', desc: 'Complete finance toolkit', icon: <FiBarChart2 size={22} />, color: 'text-purple-400' },
-              { value: '100%', label: 'Free Forever', desc: 'No hidden fees or trials', icon: <FiCreditCard size={22} />, color: 'text-emerald-400' },
-              { value: '24/7', label: 'Always Available', desc: 'Access anytime, anywhere', icon: <FiActivity size={22} />, color: 'text-amber-400' },
+              { value: '12', label: 'Integrated Modules', desc: 'Complete finance toolkit', icon: <FiBarChart2 size={22} />, color: 'text-indigo-400' },
+              { value: '25', label: 'Languages', desc: 'Global accessibility', icon: <FiGlobe size={22} />, color: 'text-purple-400' },
+              { value: '30+', label: 'Themes', desc: 'Customize your look', icon: <FiStar size={22} />, color: 'text-amber-400' },
+              { value: '128+', label: 'Currencies', desc: 'Real-time exchange rates', icon: <FiCreditCard size={22} />, color: 'text-emerald-400' },
             ].map((s, i) => (
               <div key={i} className="text-center group">
                 <div className={`${s.color} flex justify-center mb-3 group-hover:scale-110 transition-transform`}>{s.icon}</div>
@@ -290,7 +290,7 @@ const Login = () => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: <FiTrendingUp size={24} />, title: 'Income Tracking', desc: 'Monitor salary, freelance income, investments, and all revenue streams in real-time with visual charts and trend analysis.', color: 'text-emerald-400', border: 'border-emerald-500/10', bg: 'bg-emerald-500/5' },
+              { icon: <FiTrendingUp size={24} />, title: 'AI-Powered Insights', desc: '15+ AI engines analyze your spending patterns, predict future expenses, and provide personalized financial recommendations.', color: 'text-emerald-400', border: 'border-emerald-500/10', bg: 'bg-emerald-500/5' },
               { icon: <FiPieChart size={24} />, title: 'Smart Budgets', desc: 'Set category-based spending limits, receive progress alerts, and get AI-powered suggestions to optimize your monthly budget.', color: 'text-amber-400', border: 'border-amber-500/10', bg: 'bg-amber-500/5' },
               { icon: <FiCreditCard size={24} />, title: 'Expense Management', desc: 'Log every transaction, categorize spending automatically, and see detailed breakdowns of where your money goes each month.', color: 'text-rose-400', border: 'border-rose-500/10', bg: 'bg-rose-500/5' },
               { icon: <FiRefreshCw size={24} />, title: 'Split Bills', desc: 'Easily divide expenses among friends, track who owes what, and settle up with clear breakdowns for every participant.', color: 'text-cyan-400', border: 'border-cyan-500/10', bg: 'bg-cyan-500/5' },
@@ -346,7 +346,7 @@ const Login = () => {
           <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] mb-4">
               <FiBarChart2 size={12} className="text-indigo-400" />
-              <span className="text-white/60 text-[11px] font-semibold tracking-wide uppercase">All 7 Modules</span>
+              <span className="text-white/60 text-[11px] font-semibold tracking-wide uppercase">All 12 Modules</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">Your Complete <span className="bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">Finance Toolkit</span></h2>
             <p className="text-white/40 text-base max-w-2xl mx-auto">Every module is purpose-built to handle a specific aspect of your financial life, working together seamlessly.</p>
@@ -354,13 +354,18 @@ const Login = () => {
 
           <div className="space-y-4">
             {[
-              { num: '01', title: 'Dashboard', desc: 'Your financial command center with at-a-glance summaries, charts, recent activity, and quick actions for every module.', icon: <FiActivity size={20} />, color: 'text-indigo-400', gradient: 'from-indigo-500/10 to-indigo-600/5' },
+              { num: '01', title: 'Dashboard', desc: 'Your financial command center with AI chat, health score, spending heatmap, charts, and quick actions for every module.', icon: <FiActivity size={20} />, color: 'text-indigo-400', gradient: 'from-indigo-500/10 to-indigo-600/5' },
               { num: '02', title: 'Expenses', desc: 'Log, categorize, and analyze every expense. See monthly trends, top spending categories, and daily breakdowns in beautiful charts.', icon: <FiCreditCard size={20} />, color: 'text-rose-400', gradient: 'from-rose-500/10 to-rose-600/5' },
-              { num: '03', title: 'Budget Planner', desc: 'Create budgets by category with custom limits. Track progress with visual bars, get alerts when you approach limits, and compare month-over-month.', icon: <FiPieChart size={20} />, color: 'text-amber-400', gradient: 'from-amber-500/10 to-amber-600/5' },
-              { num: '04', title: 'Money Lent', desc: 'Track every rupee or dollar you lend. Record partial repayments, set reminders, and see outstanding amounts at a glance with borrower profiles.', icon: <FiTrendingUp size={20} />, color: 'text-emerald-400', gradient: 'from-emerald-500/10 to-emerald-600/5' },
-              { num: '05', title: 'Money Borrowed', desc: 'Keep honest records of what you owe. Track repayments you have made, see remaining balances, and stay on top of your obligations.', icon: <FiRefreshCw size={20} />, color: 'text-cyan-400', gradient: 'from-cyan-500/10 to-cyan-600/5' },
-              { num: '06', title: 'Split Bills', desc: 'Perfect for group dinners, trips, or shared expenses. Add participants, split equally or custom amounts, and track who has settled up.', icon: <FiUsers size={20} />, color: 'text-purple-400', gradient: 'from-purple-500/10 to-purple-600/5' },
-              { num: '07', title: 'Settings & Profile', desc: 'Customize your experience — choose from 128+ currencies, toggle dark mode, update your profile, and manage your account security.', icon: <FiShield size={20} />, color: 'text-pink-400', gradient: 'from-pink-500/10 to-pink-600/5' },
+              { num: '03', title: 'Salary & Income', desc: 'Track multiple income sources with type-based filtering. Monitor salary, bonuses, freelance work, and investments in one place.', icon: <FiTrendingUp size={20} />, color: 'text-emerald-400', gradient: 'from-emerald-500/10 to-emerald-600/5' },
+              { num: '04', title: 'Budget Planner', desc: 'Create budgets by category with custom limits. Track progress with visual bars, get alerts when you approach limits, and compare month-over-month.', icon: <FiPieChart size={20} />, color: 'text-amber-400', gradient: 'from-amber-500/10 to-amber-600/5' },
+              { num: '05', title: 'Money Lent', desc: 'Track every rupee or dollar you lend. Record partial repayments, set reminders, and see outstanding amounts at a glance with borrower profiles.', icon: <FiRefreshCw size={20} />, color: 'text-cyan-400', gradient: 'from-cyan-500/10 to-cyan-600/5' },
+              { num: '06', title: 'Money Borrowed', desc: 'Keep honest records of what you owe. Track repayments you have made, see remaining balances, and stay on top of your obligations.', icon: <FiUsers size={20} />, color: 'text-purple-400', gradient: 'from-purple-500/10 to-purple-600/5' },
+              { num: '07', title: 'Split Bills', desc: 'Perfect for group dinners, trips, or shared expenses. Add participants, split equally or custom amounts, and track who has settled up.', icon: <FiBarChart2 size={20} />, color: 'text-pink-400', gradient: 'from-pink-500/10 to-pink-600/5' },
+              { num: '08', title: 'Financial Goals', desc: 'Set savings targets with deadlines. Track progress with visual indicators, add savings, and celebrate when you reach your goals.', icon: <FiStar size={20} />, color: 'text-yellow-400', gradient: 'from-yellow-500/10 to-yellow-600/5' },
+              { num: '09', title: 'Recurring Expenses', desc: 'Auto-track subscriptions and recurring payments. Set frequency, get reminders, and never miss a payment deadline again.', icon: <FiRefreshCw size={20} />, color: 'text-orange-400', gradient: 'from-orange-500/10 to-orange-600/5' },
+              { num: '10', title: 'Analytics', desc: 'Deep visual analytics with spending breakdowns, category comparisons, and trend analysis to understand your financial patterns.', icon: <FiActivity size={20} />, color: 'text-teal-400', gradient: 'from-teal-500/10 to-teal-600/5' },
+              { num: '11', title: 'Smart Rules', desc: 'Automated rules engine for expense categorization. Create custom rules to auto-tag transactions based on patterns you define.', icon: <FiShield size={20} />, color: 'text-violet-400', gradient: 'from-violet-500/10 to-violet-600/5' },
+              { num: '12', title: 'Smart Notifications', desc: 'Event-driven alerts for budget limits, spending anomalies, goal progress, and financial health. Stay informed without spam.', icon: <FiZap size={20} />, color: 'text-fuchsia-400', gradient: 'from-fuchsia-500/10 to-fuchsia-600/5' },
             ].map((m, i) => (
               <div key={i} className={`flex items-start gap-5 p-5 sm:p-6 rounded-2xl bg-gradient-to-r ${m.gradient} border border-white/[0.04] hover:border-white/[0.08] transition-all group`}>
                 <div className={`w-12 h-12 rounded-xl bg-white/[0.05] flex items-center justify-center shrink-0 ${m.color} group-hover:scale-110 transition-transform`}>{m.icon}</div>
@@ -381,15 +386,15 @@ const Login = () => {
       <section className="relative bg-[#070d1f] overflow-hidden">
         <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 py-20">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">Why <span className="bg-gradient-to-r from-amber-300 to-orange-300 bg-clip-text text-transparent">Smart Finance?</span></h2>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">Why <span className="bg-gradient-to-r from-amber-300 to-orange-300 bg-clip-text text-transparent">FinanceTracker?</span></h2>
             <p className="text-white/40 text-base max-w-xl mx-auto">Built by people who understand the pain of managing money across multiple tools.</p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { icon: <FiZap size={20} />, title: 'Lightning Fast', desc: 'Instant loading, no lag. Built with modern tech for the smoothest experience.' },
+              { icon: <FiZap size={20} />, title: 'AI-Powered', desc: '15+ AI engines analyze your finances, predict spending, and provide smart recommendations.' },
               { icon: <FiShield size={20} />, title: 'Bank-Grade Security', desc: 'AES-256 encryption, secure JWT tokens, and hashed passwords protect your data.' },
-              { icon: <FiGlobe size={20} />, title: 'Multi-Currency', desc: 'Real-time exchange rates for 128+ currencies with automatic conversion everywhere.' },
+              { icon: <FiGlobe size={20} />, title: 'Multi-Language', desc: '25 languages supported including Hindi, Spanish, French, German, Chinese, and more.' },
               { icon: <FiCheckCircle size={20} />, title: 'Always Free', desc: 'No premium tiers, no feature locks, no credit card. Full access from day one.' },
             ].map((w, i) => (
               <div key={i} className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.05] hover:bg-white/[0.06] transition-all text-center group">
@@ -439,7 +444,7 @@ const Login = () => {
 
         {/* Footer */}
         <div className="border-t border-white/[0.04] py-6">
-          <p className="text-center text-[11px] text-white/20 tracking-wide">© 2024 Smart Finance Tracker · Built with precision · All rights reserved</p>
+          <p className="text-center text-[11px] text-white/20 tracking-wide">© 2026 FinanceTracker · AI-Powered Finance Platform · All rights reserved</p>
         </div>
       </section>
     </div>
