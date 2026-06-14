@@ -2,6 +2,8 @@
 
 A production-ready, full-stack MERN application with **12 integrated modules**, **15+ AI engines**, **128+ currencies**, **25 languages**, and **30+ themes**. Track expenses, manage salaries, plan budgets, set goals, split bills, and get AI-powered financial insights — all in one platform.
 
+Live deployment: https://smart-finance-tracker-g5b3.onrender.com
+
 ## Features
 
 ### 12 Core Modules
@@ -194,6 +196,8 @@ npm start
 - Graceful server shutdown
 
 ## Deployment
+
+Live app: https://smart-finance-tracker-g5b3.onrender.com
 
 ### Production Build
 
